@@ -12,7 +12,7 @@ class VideoFragment:
     content: str
 
 
-def search(phrase: str, path: str) -> typing.List[VideoFragment]:
+def search(phrase: str, path: str) -> (typing.List[typing.Dict], (str, str)):
     connection = sqlite3.connect(path)
     connection.create_function("REGEXP", 2, lambda expr, item: re.compile(expr).search(item.lower()) is not None)
     cursor = connection.cursor()
@@ -21,21 +21,18 @@ def search(phrase: str, path: str) -> typing.List[VideoFragment]:
                           (r'.*\W' + phrase.lower() + r'\W.*',))
 
     result = []
-    for row in rows:
+    for row in list(rows):
         data = VideoFragment(*row)
-        print(data)
-        video_id = data.video_id
-        link = list(cursor.execute('''SELECT link FROM videos WHERE video_id=:id;''', {'id': video_id}))[0][0]
+        link = list(cursor.execute('''SELECT link FROM videos WHERE video_id=:id;''', {'id': data.video_id}))[0][0]
         start = int(data.start / 1000)
-        duration = int(data.duration / 1000) + 1
-        end = start + duration
-        content = data.content
-        result.append({'content': content,
-                       'link': link})
-        break
+        end = start + int(data.duration / 1000) + 1
+        result.append({'content': data.content,
+                       'link': link + f'#t={start},{end}'
+                       })
+        # print(result)
     connection.close()
-    return result
+    return result, ('content', 'link')
 
 
 if __name__ == '__main__':
-    print(search('for the', '../database.sqlite'))
+    print(search('thank', '../database.sqlite'))

@@ -1,0 +1,22 @@
+<table border="0">
+    <thead>
+    <tr>
+        {% for col in colnames %}
+        <th>{{ col }}</th>
+        {% endfor %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for record in records %}
+    <tr>
+        <td>{{record.content}}</td>
+        <td>
+            <video width="400" height="300" controls="controls">
+                <source src="{{record.link}}"
+                        type='video/mp4'>
+            </video>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
