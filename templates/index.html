@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Happy English Service</title>
+</head>
+<body>
+<h1>Happy English with TED</h1>
+<h4>We will help you to learn english by watching TED videos!</h4>
+
+<form action="/search" method="get">
+    <p>
+        <label for="phrase">Phrase</label>
+        <input type="text" name="phrase">
+    </p>
+    <p>
+        <input type="submit">
+    </p>
+</form>
+
+
+<div class="content">
+    {% block content %} {% endblock %}
+</div>
+</body>
+</html>

@@ -25,7 +25,7 @@ def search(phrase: str, path: str) -> (typing.List[typing.Dict], (str, str)):
         data = VideoFragment(*row)
         link = list(cursor.execute('''SELECT link FROM videos WHERE video_id=:id;''', {'id': data.video_id}))[0][0]
         start = int(data.start / 1000)
-        end = start + int(data.duration / 1000) + 1
+        end = start + int(data.duration / 1000) + 3
         result.append({'content': data.content,
                        'link': link + f'#t={start},{end}'
                        })
