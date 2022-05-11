@@ -2,7 +2,7 @@ import sqlite3
 import sys
 
 
-def create_db(path: str):
+def create_db(path: str) -> None:
     connection = sqlite3.connect(path)
     cursor = connection.cursor()
     cursor.execute('''CREATE TABLE subtitles
