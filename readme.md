@@ -1,5 +1,7 @@
 # Service for learning english using examples
 
+The HappyEnglish app with which you can search for fragments from TED educational videos with the specific words and phrases. The point of this app: make learning English easier -- you can find new words in the context using the app. 
+
 ## Web app
 
 
